@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AddMeal = () => {
+const AllMember = () => {
     return (
         <div>
-            add meal
+            AllMember
         </div>
     );
 };
 
-export default AddMeal;
+export default AllMember;
