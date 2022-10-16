@@ -12,8 +12,16 @@ import {
     FcDonate,
     FcShipped,
     FcBarChart,
+    FcPlus,
     FcFlashOn,
-    FcBusinessman
+    FcBusinessman,
+    FcConferenceCall,
+    FcPodiumWithSpeaker,
+    FcSynchronize,
+    FcAddDatabase,
+    FcProcess,
+    FcDeleteDatabase,
+    FcCancel
 } from 'react-icons/fc';
 import { AiOutlineRight, AiOutlineLeft, AiOutlineLogout } from 'react-icons/ai';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
@@ -41,7 +49,7 @@ const RightNav = ({ close, setClose }) => {
             link: '/add-money',
         },
         {
-            icon: <FcGoodDecision />,
+            icon: <FcPlus />,
             name: 'Add Meal',
             link: '/add-meal',
         },
@@ -68,37 +76,37 @@ const RightNav = ({ close, setClose }) => {
     ]
     const optionNav = [
         {
-            icon: <FcHome />,
+            icon: <FcConferenceCall />,
             name: 'All Members',
             link: '/all-members',
         },
         {
-            icon: <FcPortraitMode />,
+            icon: <FcPodiumWithSpeaker />,
             name: 'Remove Member',
             link: '/remove-member',
         },
         {
-            icon: <FcMoneyTransfer />,
+            icon: <FcSynchronize />,
             name: "Change Manager",
             link: '/change-manager',
         },
         {
-            icon: <FcGoodDecision />,
+            icon: <FcAddDatabase />,
             name: 'Start New Month',
             link: '/start-new-month',
         },
         {
-            icon: <FcSettings />,
+            icon: <FcProcess />,
             name: 'Switch Active Month',
             link: '/switch-active-month',
         },
         {
-            icon: <FcDonate />,
+            icon: <FcDeleteDatabase />,
             name: 'Delete Old Month',
             link: '/delete-month',
         },
         {
-            icon: <FcShipped />,
+            icon: <FcCancel />,
             name: 'Delete Mess',
             link: '/delete-mess',
         },
