@@ -1,5 +1,6 @@
 :root{
     --primary-color: #3c40c6;
+    --primary-border_color: #3c41c66b;
 }
 
 *{
@@ -8,6 +9,10 @@
 
 .cursor-pointer{
     cursor: pointer;
+}
+
+.bg-primary{
+    background-color: var(--primary-color);
 }
 
 

@@ -7,7 +7,6 @@ import {
     FcHome,
     FcPortraitMode,
     FcMoneyTransfer,
-    FcGoodDecision,
     FcSettings,
     FcDonate,
     FcShipped,
