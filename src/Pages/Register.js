@@ -16,7 +16,7 @@ const Register = () => {
     }
 
     return (
-        <>
+        <div className="auth">
             <div className="container">
                 <div className="mx-auto auth-container">
                     <h1 className="text-center fw-bold mb-4 auth_header"> Register </h1>
@@ -100,7 +100,7 @@ const Register = () => {
 
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

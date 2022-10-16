@@ -1,4 +1,10 @@
-.auth-container{
+.auth {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 30px 0;
+}
+
+.auth-container {
     max-width: 400px;
     width: 100%;
     display: flex;
@@ -7,23 +13,23 @@
     align-items: center;
     justify-content: center;
     padding: 20px 30px;
-    margin: 30px 0;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
-.auth_header{
+.auth_header {
     text-decoration: underline;
 }
 
-.auth-btn{
+.auth-btn {
     color: #fff;
     border: 2px solid;
     width: 100%;
     font-weight: bold;
 }
 
-.auth-btn:hover{
+.auth-btn:hover {
     color: var(--primary-color);
     background-color: #fff;
 }

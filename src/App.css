@@ -2,9 +2,15 @@
     --primary-color: #3c40c6;
 }
 
-
-
-body{
-    background-color: var(--primary-color);
-    color: #fff;
+*{
+    box-sizing: border-box;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+
+/* body{
+
+} */

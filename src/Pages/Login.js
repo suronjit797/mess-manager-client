@@ -14,7 +14,7 @@ const Login = () => {
     }
 
     return (
-        <>
+        <div className='auth'>
             <div className="container">
                 <div className="mx-auto auth-container">
                     <h1 className="text-center fw-bold mb-4 auth_header"> Login </h1>
@@ -59,7 +59,7 @@ const Login = () => {
 
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
