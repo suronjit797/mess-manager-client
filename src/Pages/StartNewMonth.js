@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const StartNewMonth = () => {
     return (
-        <div>
-            start new month
-        </div>
+        <Layout>
+            Start new month
+        </Layout>
     );
 };
 

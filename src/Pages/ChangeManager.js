@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const ChangeManager = () => {
     return (
-        <div>
-            change ChangeManager
-        </div>
+        <Layout>
+            Change manager
+        </Layout>
     );
 };
 

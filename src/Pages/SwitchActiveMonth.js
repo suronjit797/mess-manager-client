@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const SwitchActiveMonth = () => {
     return (
-        <div>
-            SwitchActiveMonth
-        </div>
+        <Layout>
+            Switch active month
+        </Layout>
     );
 };
 

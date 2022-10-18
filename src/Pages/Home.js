@@ -1,10 +1,21 @@
 import React from 'react';
+import { Col, Row } from 'react-bootstrap';
+import HomeMembers from '../Components/HomeMembers/HomeMembers';
 import Layout from '../Components/Layout/Layout';
+import SummaryLeft from '../Components/SummaryLeft';
+import SummaryRight from '../Components/SummaryRight';
 
 const Home = () => {
     return (
         <Layout>
-            home
+            <Row className='gx-1 py-3'  >
+                <Col md={4}> <SummaryLeft /> </Col>
+                <Col md={8}> <SummaryRight /> </Col>
+            </Row>
+
+            <HomeMembers />
+
+
         </Layout>
     );
 };

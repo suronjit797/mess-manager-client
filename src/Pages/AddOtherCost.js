@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const AddOtherCost = () => {
     return (
-        <div>
-            active other cost
-        </div>
+        <Layout>
+            add other cost
+        </Layout>
     );
 };
 

@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const DeleteMess = () => {
     return (
-        <div>
-            DeleteMess
-        </div>
+        <Layout>
+            delete mess
+        </Layout>
     );
 };
 

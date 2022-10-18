@@ -26,7 +26,6 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/add-member' element={<AddMember />} />
@@ -45,6 +44,9 @@ function App() {
         <Route path='/delete-mess' element={<DeleteMess />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/notifications' element={<Notifications />} />
+        <Route path='/' exact element={<Home />} />
+
+        <Route path='*' element={''} />
       </Routes>
     </div>
   );

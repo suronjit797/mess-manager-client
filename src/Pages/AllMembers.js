@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const AllMember = () => {
     return (
-        <div>
-            AllMember
-        </div>
+        <Layout>
+            All member
+        </Layout>
     );
 };
 

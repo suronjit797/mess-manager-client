@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const AddMealCost = () => {
     return (
-        <div>
+        <Layout>
             add meal cost
-        </div>
+        </Layout>
     );
 };
 

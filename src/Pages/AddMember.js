@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const AddMember = () => {
     return (
-        <div>
+        <Layout>
             add member
-        </div>
+        </Layout>
     );
 };
 

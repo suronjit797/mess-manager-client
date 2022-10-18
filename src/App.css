@@ -11,8 +11,12 @@
     cursor: pointer;
 }
 
-.bg-primary{
+.bg_primary{
     background-color: var(--primary-color);
+}
+
+.text_primary{
+    color: var(--primary-color);
 }
 
 

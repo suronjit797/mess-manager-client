@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const AddSingleMeal = () => {
     return (
-        <div>
+        <Layout>
             add single meal
-        </div>
+        </Layout>
     );
 };
 

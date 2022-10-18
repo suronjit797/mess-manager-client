@@ -11,8 +11,8 @@ const TopNav = () => {
     return (
         <div className='d-flex topNav'>
             <div className="ms-auto d-flex align-items-center">
-                <IoMdNotificationsOutline className='bg-primary' />
-                <BsHeadset className='mx-2 bg-primary' />
+                <IoMdNotificationsOutline className='bg_primary' />
+                <BsHeadset className='mx-2 bg_primary' />
                 <div className="userImg cursor-pointer" >
                     <FcBusinessman />
                 </div>

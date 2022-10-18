@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-import './rightNav.css'
+import './LeftNav.css'
 
 import {
     FcHome,
@@ -27,10 +27,8 @@ import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 
 
 
-const RightNav = ({ close, setClose }) => {
-
+const LeftNav = memo(({ close, setClose }) => {
     const [show, setShow] = useState(false)
-
     const mainNav = [
         {
             icon: <FcHome />,
@@ -111,8 +109,6 @@ const RightNav = ({ close, setClose }) => {
         },
     ]
 
-
-
     return (
         <div className={close ? 'rightNav' : 'rightNav active'}>
             <div className="logo">
@@ -121,20 +117,17 @@ const RightNav = ({ close, setClose }) => {
                     <AiOutlineLeft />
                 </span>
             </div>
-
             <ul className='mb-0'>
                 {
                     mainNav.map(item => (
                         <li key={item.name} >
                             <NavLink
                                 to={item.link}
-                                className={({ isActive }) => `rightNavItems ${close ? '' : 'justify-content-center'} ${isActive ? 'active' : ''}`}
-                            >
+                                className={`rightNavItems ${close ? '' : 'justify-content-center'}`}>
                                 <span className='icon'> {item.icon} </span>
                                 <span className={`${close ? '' : 'd-none '} text`}> {item.name} </span>
                             </NavLink>
                         </li>
-
                     ))
                 }
                 <li className='rightNavItems cursor-pointer' onClick={() => setShow(!show)} >
@@ -145,7 +138,6 @@ const RightNav = ({ close, setClose }) => {
                             show ? <BsChevronDown /> : <BsChevronUp />
                         }
                     </div>
-
                 </li>
             </ul>
 
@@ -155,8 +147,7 @@ const RightNav = ({ close, setClose }) => {
                         <li key={item.name} >
                             <NavLink
                                 to={item.link}
-                                className={({ isActive }) => `rightNavItems ${close ? '' : 'justify-content-center'} ${isActive ? 'active' : ''}`}
-                            >
+                                className={`rightNavItems ${close ? '' : 'justify-content-center'}`}>
                                 <span className='icon'> {item.icon} </span>
                                 <span className={`${close ? '' : 'd-none'} text`}> {item.name} </span>
                             </NavLink>
@@ -183,11 +174,8 @@ const RightNav = ({ close, setClose }) => {
                 </div>
             </div>
 
-
-
         </div >
-
     );
-};
+});
 
-export default RightNav;
+export default LeftNav;

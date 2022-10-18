@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const ActiveMonthDetails = () => {
     return (
-        <div>
+        <Layout>
             active month details
-        </div>
+        </Layout>
     );
 };
 

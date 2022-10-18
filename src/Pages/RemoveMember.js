@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const RemoveMember = () => {
     return (
-        <div>
-            RemoveMember
-        </div>
+        <Layout>
+            Remove member
+        </Layout>
     );
 };
 

@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const DeleteOldMonth = () => {
     return (
-        <div>
-            DeleteOldMonth
-        </div>
+        <Layout>
+            Delete old month
+        </Layout>
     );
 };
 

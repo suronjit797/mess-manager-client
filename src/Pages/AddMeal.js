@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const AddMeal = () => {
     return (
-        <div>
+        <Layout>
             add meal
-        </div>
+        </Layout>
     );
 };
 

@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../Components/Layout/Layout'
 
 const AddMoney = () => {
     return (
-        <div>
+        <Layout>
             add money
-        </div>
+        </Layout>
     );
 };
 
