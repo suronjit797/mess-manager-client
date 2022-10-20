@@ -1,3 +1,9 @@
 .layout{
     display: flex;
 }
+
+.layout_body {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 60px);
+}
