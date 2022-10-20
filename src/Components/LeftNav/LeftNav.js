@@ -135,7 +135,7 @@ const LeftNav = memo(({ close, setClose }) => {
                     <span className={`${close ? '' : 'd-none'} text`}> Options </span>
                     <div className={close ? 'ms-auto' : 'd-none'}>
                         {
-                            show ? <BsChevronDown /> : <BsChevronUp />
+                            show ?  <BsChevronUp /> : <BsChevronDown />
                         }
                     </div>
                 </li>

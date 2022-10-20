@@ -13,8 +13,12 @@ const SummaryLeft = memo(() => {
     const user = useSelector(state => state.user.user)
     const mess = useSelector(state => state.mess.messData)
 
+    if (Object.keys(mess).length === 0 || Object.keys(mess).length === 0) {
+        return <p> Loading... </p>
+    }
+
     // calculate data 
-    const myCost = Number(user?.meal) * mess.meal_rate
+    const myCost = (Number(user?.meal) * mess.meal_rate) + (Number(user.solo))
     const myBalance = Number(user?.balance) - myCost
 
     return (

@@ -6,15 +6,19 @@ import { BiUserMinus } from 'react-icons/bi';
 import { RiExchangeDollarFill } from 'react-icons/ri';
 
 const SummaryLeft = memo(() => {
+
     // get data from redux
-    const user = useSelector(state => state.user.user)
     const mess = useSelector(state => state.mess.messData)
+
+    if (Object.keys(mess).length === 0) {
+        return <p> Loading... </p>
+    }
+
     const { total_deposit, total_meal, total_other_cost, total_solo_cost, meal_rate } = mess
-    console.log(mess)
 
     const totalMealCost = Number(meal_rate) * Number(total_meal)
     const sharedCost = Number(total_other_cost) / mess.members.length || 0
-    const messBalance = total_deposit - (totalMealCost + sharedCost) 
+    const messBalance = total_deposit - (totalMealCost + sharedCost)
 
     return (
         <div className='m-2 border border-1 rounded-3 p-3 text-capitalize' >
