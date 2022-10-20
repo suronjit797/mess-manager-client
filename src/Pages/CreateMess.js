@@ -1,15 +1,22 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import { useDispatch } from 'react-redux'
+import { getMessData } from '../features/MessSlice'
 
 const CreateMess = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const [err, setErr] = useState('')
     const [mess_name, setMess_name] = useState('')
     const [mess_month, setMess_month] = useState(0)
     const [user, setUser] = useState({})
+
+
+    // const data = useSelector((state)=> console.log(state))
 
 
     useEffect(() => {
@@ -18,31 +25,29 @@ const CreateMess = () => {
             .catch(err => console.log(err))
     }, [])
 
-
     if (user.mess_id) {
         navigate('/')
     }
 
-
-
-    const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-    const handleLogout = e =>{
+    const handleLogout = e => {
         localStorage.removeItem('token')
         navigate('/login')
     }
-
-
 
     const submitHandler = event => {
         event.preventDefault()
 
         axios.post('/mess', { mess_name, mess_month })
-            .then(res => console.log(res.data))
+            .then(res => {
+                if (res.data.status) {
+                    dispatch(getMessData(res.data.mess))
+                    navigate('/')
+                }
+            })
             .catch(error => {
                 const message = error.response.data.message
                 console.log(message)
-                if (error.request.status) {
+                if (error.request.status === 403) {
                     return Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
@@ -52,6 +57,8 @@ const CreateMess = () => {
                 setErr(message)
             })
     }
+
+    const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     return (
         <div className='auth'>
@@ -103,10 +110,10 @@ const CreateMess = () => {
 
                     </p>
                     <hr className="w-100 my-4" />
-                    <Button 
-                    className='d-block mt-4 w-100' 
-                    type="submit"
-                    onClick={handleLogout}
+                    <Button
+                        className='d-block mt-4 w-100'
+                        type="submit"
+                        onClick={handleLogout}
                     > Logout </Button>
 
 

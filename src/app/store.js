@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import AuthenticationReducer from "../features/AuthenticationSlice";
+import MessReducer from "../features/MessSlice";
+import UserReducer from "../features/UserSlice";
 
 
 
 export const store = configureStore({
     reducer:{
-        auth: AuthenticationReducer
+        mess: MessReducer,
+        user: UserReducer,
     }
 })

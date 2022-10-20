@@ -7,33 +7,37 @@ import Footer from '../Footer';
 import RequireAuth from '../../utilities/RequireAuth';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMessData } from '../../features/MessSlice'
+import { getUserData } from '../../features/UserSlice'
 
 
 const Layout = ({ children }) => {
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.user.user)
 
     const [close, setClose] = useState(true)
-    const [user, setUser] = useState({})
 
 
     useEffect(() => {
         axios.get('/users')
-            .then(res => setUser(res.data))
-            .catch(err => console.log(err))
-    }, [])
+            .then(res => {
+                dispatch(getUserData(res.data.user))
+            })
+            .catch(err => console.table(err))
+
+        axios.get('/mess/singleMess')
+            .then(res => dispatch(getMessData(res.data.mess)))
+            .catch(err => console.table(err))
+    }, [dispatch])
 
     useEffect(() => {
-        if (!user.mess_id) {
+        if (Object.keys(user).length && !user.mess_id) {
             navigate('/create-mess')
         }
-    }, [])
-
-    useEffect(() => {
-        if (!user.mess_id) {
-            navigate('/create-mess')
-        }
-    }, [user.mess_id, navigate])
+    }, [navigate, user])
 
     return (
         <RequireAuth>
