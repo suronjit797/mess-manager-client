@@ -16,22 +16,24 @@ const Layout = ({ children }) => {
     const [close, setClose] = useState(true)
     const [user, setUser] = useState({})
 
-    
+
     useEffect(() => {
         axios.get('/users')
-        .then(res => setUser(res.data))
-        .catch(err => console.log(err))
+            .then(res => setUser(res.data))
+            .catch(err => console.log(err))
     }, [])
-    
+
     useEffect(() => {
         if (!user.mess_id) {
             navigate('/create-mess')
-        }    
+        }
     }, [])
 
-    if (!user.mess_id) {
-        navigate('/create-mess')
-    }
+    useEffect(() => {
+        if (!user.mess_id) {
+            navigate('/create-mess')
+        }
+    }, [user.mess_id, navigate])
 
     return (
         <RequireAuth>

@@ -27,6 +27,11 @@ const CreateMess = () => {
 
     const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
+    const handleLogout = e =>{
+        localStorage.removeItem('token')
+        navigate('/login')
+    }
+
 
 
     const submitHandler = event => {
@@ -59,7 +64,6 @@ const CreateMess = () => {
                             <Form.Control
                                 type="text"
                                 value={mess_name}
-                                id="mess_name"
                                 onChange={e => setMess_name(e.target.value)}
                                 placeholder="Enter Mess Name"
                                 className={err?.mess_name ? 'is-invalid' : ''}
@@ -76,7 +80,6 @@ const CreateMess = () => {
                             <Form.Select
                                 className={err?.mess_name ? 'is-invalid' : ''}
                                 value={mess_month}
-                                id='mess_month'
                                 onChange={e => setMess_month(e.target.value)}
                             >
                                 <option value='0' disabled>Select Your Month</option>
@@ -97,7 +100,15 @@ const CreateMess = () => {
                     <hr className="w-100 my-4" />
                     <p className="text-center">
                         Already have a mess, send your mail to the mess manager and ask him to add you
+
                     </p>
+                    <hr className="w-100 my-4" />
+                    <Button 
+                    className='d-block mt-4 w-100' 
+                    type="submit"
+                    onClick={handleLogout}
+                    > Logout </Button>
+
 
                 </div>
             </div>
