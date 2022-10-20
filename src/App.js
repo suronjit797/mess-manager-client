@@ -21,6 +21,7 @@ import DeleteOldMonth from './Pages/DeleteOldMonth';
 import DeleteMess from './Pages/DeleteMess';
 import Profile from './Pages/Profile';
 import Notifications from './Pages/Notifications';
+import CreateMess from './Pages/CreateMess';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path='/delete-mess' element={<DeleteMess />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/notifications' element={<Notifications />} />
+        <Route path='/create-mess' exact element={<CreateMess />} />
         <Route path='/' exact element={<Home />} />
 
         <Route path='*' element={''} />

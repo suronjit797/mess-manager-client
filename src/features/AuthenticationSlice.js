@@ -1,24 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 const initialState = {
     user: {},
-    error: {  password: 'please provide password' },
+    error: { password: 'please provide password' },
     isAuthenticated: false
 }
 export const authenticationSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        // increment: (state) => {
-        //     state.value += 1
-        // },
-        // decrement: (state) => {
-        //     state.value -= 1
-        // },
+
+        login: async (state, action) => {
+            const { email, password } = action.payload
+            const result = await axios.post('/users/login', { email, password })
+            console.log(result)
+            state.user = result.data
+        },
+
+        register: (state) => {
+
+        },
         // incrementByAmount: (state, action) => {
         //     state.value += action.payload
         // },
     },
 })
-// export const { increment, decrement, incrementByAmount } = authenticationSlice.actions
+export const { login, register } = authenticationSlice.actions
 export default authenticationSlice.reducer

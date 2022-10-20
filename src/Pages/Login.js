@@ -1,16 +1,35 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useSelector, useDispatch } from 'react-redux'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './styles/auth.css'
 
 const Login = () => {
-    const auth = useSelector((state) => state.auth)
+    const navigate = useNavigate()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [err, setErr] = useState('')
+
+    const token = localStorage.getItem('token')
+    useEffect(() => {
+        if (token) {
+            navigate('/')
+        }
+    }, [navigate, token])
 
     const loginHandler = event => {
         event.preventDefault()
+        axios.post('/users/login', { email, password })
+            .then(res => {
+                if (res.data.status) {
+                    localStorage.setItem('token', res.data.token)
+                    navigate('/')
+                }
+            })
+            .catch(error => setErr(error.response.data.message))
+
+
     }
 
     return (
@@ -24,13 +43,13 @@ const Login = () => {
                             <Form.Control
                                 type="email"
                                 value={email}
-                                onChange={e=>setEmail(e.target.value)}
+                                onChange={e => setEmail(e.target.value)}
                                 placeholder="Enter email"
-                                className={auth.error.email ? 'is-invalid' : ''}
+                                className={err?.email ? 'is-invalid' : ''}
                             />
                             {
-                                auth.error.email ? (
-                                    <Form.Text className="text-warning text-capitalize"> {auth.error.email} </Form.Text>
+                                err?.email ? (
+                                    <Form.Text className="text-warning text-capitalize ps-2"> {err?.email} </Form.Text>
                                 ) : ''
                             }
                         </Form.Group>
@@ -40,14 +59,14 @@ const Login = () => {
                             <Form.Control
                                 type="password"
                                 value={password}
-                                onChange={e=>setPassword(e.target.value)}
+                                onChange={e => setPassword(e.target.value)}
                                 placeholder="Password"
                                 minLength={6}
-                                className={auth.error.password ? 'is-invalid' : ''}
+                                className={err?.password ? 'is-invalid' : ''}
                             />
                             {
-                                auth.error.password ? (
-                                    <Form.Text className="text-warning text-capitalize"> {auth.error.password} </Form.Text>
+                                err?.password ? (
+                                    <Form.Text className="text-warning text-capitalize ps-2"> {err?.password} </Form.Text>
                                 ) : ''
                             }
                         </Form.Group>
