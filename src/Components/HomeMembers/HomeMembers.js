@@ -27,8 +27,8 @@ const HomeMembers = memo(() => {
                 <div className="divider_row"></div>
             </div>
 
-            <div className="memberList">
-                <div className="row">
+            <div className="memberList mt-4">
+                <div className="row g-3" >
                     {
                         members.map(member => <HomeCard key={member._id} {...member} meal_rate={meal_rate} />)
                     }

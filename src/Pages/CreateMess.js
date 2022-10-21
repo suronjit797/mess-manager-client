@@ -1,29 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
-import { useDispatch } from 'react-redux'
-import { getMessData } from '../features/MessSlice'
 
 const CreateMess = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const [err, setErr] = useState('')
     const [mess_name, setMess_name] = useState('')
     const [mess_month, setMess_month] = useState(0)
-    const [user, setUser] = useState({})
 
-
-    // const data = useSelector((state)=> console.log(state))
-
-
-    useEffect(() => {
-        axios.get('/users')
-            .then(res => setUser(res.data))
-            .catch(err => console.log(err))
-    }, [])
+    const user = useSelector(state => state.user.user)
 
     if (user.mess_id) {
         navigate('/')
@@ -40,7 +29,6 @@ const CreateMess = () => {
         axios.post('/mess', { mess_name, mess_month })
             .then(res => {
                 if (res.data.status) {
-                    dispatch(getMessData(res.data.mess))
                     navigate('/')
                 }
             })
