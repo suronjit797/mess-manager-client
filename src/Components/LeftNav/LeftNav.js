@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import './LeftNav.css'
 
@@ -24,11 +24,22 @@ import {
 } from 'react-icons/fc';
 import { AiOutlineRight, AiOutlineLeft, AiOutlineLogout } from 'react-icons/ai';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
 
 
 const LeftNav = memo(({ close, setClose }) => {
+    const navigate = useNavigate()
+    const user = useSelector(state => state.user.user)
+
     const [show, setShow] = useState(false)
+
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+        navigate('/login')
+    }
+
+
     const mainNav = [
         {
             icon: <FcHome />,
@@ -109,6 +120,10 @@ const LeftNav = memo(({ close, setClose }) => {
         },
     ]
 
+    if (Object.keys(user).length === 0) {
+        return <p className="text-danger"> Loading... </p>
+    }
+
     return (
         <div className={close ? 'rightNav' : 'rightNav active'}>
             <div className="logo">
@@ -135,7 +150,7 @@ const LeftNav = memo(({ close, setClose }) => {
                     <span className={`${close ? '' : 'd-none'} text`}> Options </span>
                     <div className={close ? 'ms-auto' : 'd-none'}>
                         {
-                            show ?  <BsChevronUp /> : <BsChevronDown />
+                            show ? <BsChevronUp /> : <BsChevronDown />
                         }
                     </div>
                 </li>
@@ -159,13 +174,15 @@ const LeftNav = memo(({ close, setClose }) => {
             <div className="bottomNav mt-auto">
                 <div className="user">
                     <div className={close ? "userImg" : 'userImg mx-auto'}>
-                        <FcBusinessman />
+                        {
+                            user.picture ? <img src={user.picture} alt={user.name} /> : <FcBusinessman />
+                        }
                     </div>
                     <div className={close ? "userDetails" : 'd-none'}>
-                        <p className="user-name m-0 text-center"> Suronjit Pal </p>
-                        <small className='user-role d-block text-center'> Member </small>
+                        <p className="user-name m-0 text-center text-capitalize"> {user.name} </p>
+                        <small className='user-role d-block text-center text-capitalize'> {user.post} </small>
                     </div>
-                    <AiOutlineLogout className={close ? "arrowBtn p-1" : 'd-none'} />
+                    <AiOutlineLogout onClick={handleLogout} className={close ? "arrowBtn p-1" : 'd-none'} />
                 </div>
                 <div className="d-flex">
                     <span className={`${close ? 'd-none' : ''} mx-auto my-2 arrowBtn`} onClick={() => setClose(!close)}>

@@ -10,12 +10,15 @@ import { useSelector } from 'react-redux'
 const SummaryLeft = memo(() => {
 
     // get data from redux
-    const user = useSelector(state => state.user.user)
+    const { _id } = useSelector(state => state.user.user)
     const mess = useSelector(state => state.mess.messData)
+
 
     if (Object.keys(mess).length === 0 || Object.keys(mess).length === 0) {
         return <p> Loading... </p>
     }
+
+    const user = mess.members.find(member => member._id === _id)
 
     // calculate data 
     const myCost = (Number(user?.meal) * mess.meal_rate) + (Number(user.solo))
