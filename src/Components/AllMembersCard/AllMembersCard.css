@@ -1,10 +1,64 @@
 .allMemberCard{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 10px;
+    position: relative;
+    user-select: none;
 }
 
 .allMemberCard img{
     width: 80px;
     height: 80px;
     border-radius: 50%;
+}
+
+.allMemberCard .dotsBtn{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.178);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.allMemberCard .deleteBtn{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 0, 0, 0.178);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: auto;
+    font-size: 25px;
+    border: transparent;
+    outline: none;
+}
+.allMemberCard .adminBtn{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 255, 55, 0.178);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 25px;
+    border: transparent;
+    outline: none;
+}
+
+.allMemberCard .adminBtn:disabled{
+    pointer-events: none;
+    color: rgba(7, 102, 28, 0.5) !important;
+}
+
+.allMemberCard .deleteBtn:disabled{
+    pointer-events: none;
+    color: rgba(255, 0, 0, 0.301) !important;
 }

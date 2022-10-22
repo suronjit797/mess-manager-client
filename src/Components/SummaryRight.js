@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import jwt_decode from "jwt-decode";
 
 import { BsCupFill, BsFillCreditCard2BackFill, BsFillCalendarEventFill } from 'react-icons/bs';
 import { HiBriefcase } from 'react-icons/hi';
@@ -9,19 +10,22 @@ import { useSelector } from 'react-redux'
 
 const SummaryLeft = memo(() => {
 
+    const token = localStorage.getItem('token')
+    const decoded = jwt_decode(token);
+    const id = decoded.id
+
     // get data from redux
-    const { _id } = useSelector(state => state.user.user)
     const mess = useSelector(state => state.mess.messData)
-
-
-    if (Object.keys(mess).length === 0 || Object.keys(mess).length === 0) {
+    
+    
+    if (Object.keys(mess).length === 0 ) {
         return <p> Loading... </p>
     }
 
-    const user = mess.members.find(member => member._id === _id)
+    const user = mess.members.find(member => member._id === id)
 
     // calculate data 
-    const myCost = (Number(user?.meal) * mess.meal_rate) + (Number(user.solo))
+    const myCost = (Number(user?.meal) * mess.meal_rate) + (Number(user?.solo))
     const myBalance = Number(user?.balance) - myCost
 
     return (
@@ -34,28 +38,28 @@ const SummaryLeft = memo(() => {
                 <Row className='g-2'>
                     <Col xs={3}>
                         <div className="border-0 card p-3 " style={{ background: 'rgb(232, 246, 255)' }}>
-                            <h4 className="fw-bold mb-3"> {user?.meal} </h4>
+                            <h5 className="fw-bold mb-3"> {user?.meal} </h5>
                             <h3> <BsCupFill style={{ color: 'rgb(14 165 233)' }} /> </h3>
                             <small> My Total Meal </small>
                         </div>
                     </Col>
                     <Col xs={3}>
                         <div className="border-0 card p-3 " style={{ background: 'rgb(255, 246, 221)' }}>
-                            <h4 className="fw-bold mb-3"> {user?.balance?.toFixed(2)} tk </h4>
+                            <h5 className="fw-bold mb-3"> {user?.balance?.toFixed(2)} tk </h5>
                             <h3> <BsFillCreditCard2BackFill style={{ color: 'rgb(255 133 72)' }} /> </h3>
                             <small> My Deposit </small>
                         </div>
                     </Col>
                     <Col xs={3}>
                         <div className="border-0 card p-3 " style={{ background: 'rgb(255, 240, 233)' }}>
-                            <h4 className="fw-bold mb-3"> {myCost.toFixed(2)} tk </h4>
+                            <h5 className="fw-bold mb-3"> {myCost.toFixed(2)} tk </h5>
                             <h3> <BsCupFill style={{ color: 'rgb(251 90 85)' }} /> </h3>
                             <small> My Cost </small>
                         </div>
                     </Col>
                     <Col xs={3}>
                         <div className="border-0 card p-3 " style={{ background: 'rgb(230, 252, 222)' }}>
-                            <h4 className="fw-bold mb-3"> {myBalance.toFixed(2)} tk </h4>
+                            <h5 className="fw-bold mb-3"> {myBalance.toFixed(2)} tk </h5>
                             <h3> <HiBriefcase style={{ color: 'rgb(34 197 94)' }} /> </h3>
                             <small> My Balance </small>
                         </div>

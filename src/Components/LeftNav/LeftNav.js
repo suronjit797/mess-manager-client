@@ -32,7 +32,7 @@ const LeftNav = memo(({ close, setClose }) => {
     const navigate = useNavigate()
     const user = useSelector(state => state.user.user)
 
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(true)
 
     const handleLogout = () => {
         localStorage.removeItem('token')
@@ -87,16 +87,6 @@ const LeftNav = memo(({ close, setClose }) => {
             icon: <FcConferenceCall />,
             name: 'All Members',
             link: '/all-members',
-        },
-        {
-            icon: <FcPodiumWithSpeaker />,
-            name: 'Remove Member',
-            link: '/remove-member',
-        },
-        {
-            icon: <FcSynchronize />,
-            name: "Change Manager",
-            link: '/change-manager',
         },
         {
             icon: <FcAddDatabase />,

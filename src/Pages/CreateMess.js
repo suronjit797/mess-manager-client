@@ -14,8 +14,6 @@ const CreateMess = () => {
 
     const user = useSelector(state => state.user.user)
 
-    console.log(user)
-
     if (user.mess_id) {
         navigate('/')
     }
