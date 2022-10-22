@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { getMessData } from '../../features/MessSlice'
 import { getUserData } from '../../features/UserSlice'
+import { getMonthData } from '../../features/MonthSlice'
 
 const Layout = ({ children }) => {
     const navigate = useNavigate()
@@ -19,6 +20,7 @@ const Layout = ({ children }) => {
     const [userData, setUserDataId] = useState({})
     const token = localStorage.getItem('token')
     useEffect(() => {
+        // get user data
         axios.get('/users', {
             headers: {
                 'Authorization': token
@@ -35,12 +37,23 @@ const Layout = ({ children }) => {
                 }
             })
             .catch(err => console.table(err))
+
+        // get mess data
         axios.get('/mess/singleMess')
             .then(res => {
                 dispatch(getMessData(res.data.mess))
                 const userRes = res.data.mess.members.find(member => member._id === userData._id)
                 if (userRes && Object.keys(userRes).length > 0) {
                     dispatch(getUserData(userRes))
+                }
+            })
+            .catch(err => console.error(err))
+
+        // get month list
+        axios.get('/mess/monthList')
+            .then(res => {
+                if (res.data.status) {
+                    dispatch(getMonthData(res.data.month))
                 }
             })
             .catch(err => console.error(err))

@@ -1,6 +1,5 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-
 import './LeftNav.css'
 
 import {
@@ -12,18 +11,14 @@ import {
     FcShipped,
     FcBarChart,
     FcPlus,
-    FcFlashOn,
     FcBusinessman,
     FcConferenceCall,
-    FcPodiumWithSpeaker,
-    FcSynchronize,
     FcAddDatabase,
     FcProcess,
     FcDeleteDatabase,
     FcCancel
 } from 'react-icons/fc';
 import { AiOutlineRight, AiOutlineLeft, AiOutlineLogout } from 'react-icons/ai';
-import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 
 
@@ -32,15 +27,12 @@ const LeftNav = memo(({ close, setClose }) => {
     const navigate = useNavigate()
     const user = useSelector(state => state.user.user)
 
-    const [show, setShow] = useState(true)
-
     const handleLogout = () => {
         localStorage.removeItem('token')
         navigate('/login')
     }
 
-
-    const mainNav = [
+    const managerNav = [
         {
             icon: <FcHome />,
             name: 'Home',
@@ -81,8 +73,6 @@ const LeftNav = memo(({ close, setClose }) => {
             name: 'Active Month Details',
             link: '/active-month-details',
         },
-    ]
-    const optionNav = [
         {
             icon: <FcConferenceCall />,
             name: 'All Members',
@@ -110,6 +100,30 @@ const LeftNav = memo(({ close, setClose }) => {
         },
     ]
 
+    const memberNav = [
+        {
+            icon: <FcHome />,
+            name: 'Home',
+            link: '/',
+        },
+        {
+            icon: <FcBarChart />,
+            name: 'Active Month Details',
+            link: '/active-month-details',
+        },
+        {
+            icon: <FcConferenceCall />,
+            name: 'All Members',
+            link: '/all-members',
+        },
+        {
+            icon: <FcProcess />,
+            name: 'Switch Active Month',
+            link: '/switch-active-month',
+        },
+    ]
+
+
     if (Object.keys(user).length === 0) {
         return <p className="text-danger"> Loading... </p>
     }
@@ -124,37 +138,13 @@ const LeftNav = memo(({ close, setClose }) => {
             </div>
             <ul className='mb-0'>
                 {
-                    mainNav.map(item => (
+                    (user.post.toLowerCase() ===  'manager' ? managerNav : memberNav).map(item => (
                         <li key={item.name} >
                             <NavLink
                                 to={item.link}
                                 className={`rightNavItems ${close ? '' : 'justify-content-center'}`}>
                                 <span className='icon'> {item.icon} </span>
                                 <span className={`${close ? '' : 'd-none '} text`}> {item.name} </span>
-                            </NavLink>
-                        </li>
-                    ))
-                }
-                <li className='rightNavItems cursor-pointer' onClick={() => setShow(!show)} >
-                    <span className='icon'> <FcFlashOn /> </span>
-                    <span className={`${close ? '' : 'd-none'} text`}> Options </span>
-                    <div className={close ? 'ms-auto' : 'd-none'}>
-                        {
-                            show ? <BsChevronUp /> : <BsChevronDown />
-                        }
-                    </div>
-                </li>
-            </ul>
-
-            <ul className={show ? 'mt-0' : 'd-none'}>
-                {
-                    optionNav.map(item => (
-                        <li key={item.name} >
-                            <NavLink
-                                to={item.link}
-                                className={`rightNavItems ${close ? '' : 'justify-content-center'}`}>
-                                <span className='icon'> {item.icon} </span>
-                                <span className={`${close ? '' : 'd-none'} text`}> {item.name} </span>
                             </NavLink>
                         </li>
                     ))
