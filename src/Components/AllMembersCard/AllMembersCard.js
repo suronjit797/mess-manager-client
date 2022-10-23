@@ -28,7 +28,11 @@ const AllMembersCard = ({ _id, name, email, post, phone, bazar, userPost }) => {
             confirmButtonText: 'Change',
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.post('/mess/changeManager', { userId: id })
+                axios.post('/mess/changeManager', { userId: id }, {
+                    headers: {
+                        'Authorization': token
+                    }
+                })
                     .then(res => {
                         const { status, mess } = res.data
                         if (status) {
@@ -53,7 +57,11 @@ const AllMembersCard = ({ _id, name, email, post, phone, bazar, userPost }) => {
             confirmButtonText: 'Confirm',
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.post('/mess/removeMember', { userId: id })
+                axios.post('/mess/removeMember', { userId: id }, {
+                    headers: {
+                        'Authorization': token
+                    }
+                })
                     .then(res => {
                         const { status, mess } = res.data
                         if (status) {

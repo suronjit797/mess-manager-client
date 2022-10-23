@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import setAuthToken from './utilities/setAuthToken';
 import './App.css';
 
 import Login from './Pages/Login'
@@ -23,7 +24,13 @@ import Profile from './Pages/Profile';
 import Notifications from './Pages/Notifications';
 import CreateMess from './Pages/CreateMess';
 
+const token = localStorage.getItem('token')
+if (token) {
+  setAuthToken(token)
+}
+
 function App() {
+
   return (
     <div>
       <Routes>

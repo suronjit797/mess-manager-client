@@ -12,7 +12,7 @@ const HomeMembers = memo(() => {
         return <p> Loading... </p>
     }
     const { members, meal_rate } = mess
-
+    
 
 
 
@@ -22,7 +22,7 @@ const HomeMembers = memo(() => {
                 <div className="divider_row"></div>
                 <div className='divider_text'>
                     <h5 className='text_primary fw-bold mb-0'>All Member Info</h5>
-                    <div className='text-muted'>Total 12 Members</div>
+                    <div className='text-muted'>Total {members?.length} Members</div>
                 </div>
                 <div className="divider_row"></div>
             </div>

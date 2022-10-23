@@ -8,6 +8,7 @@ import RequireManager from '../utilities/RequireManager';
 
 const AddOtherCost = () => {
     const mess = useSelector(state => state.mess.messData)
+    const token = localStorage.getItem('token')
 
     const [email, setEmail] = useState(0)
     const [isIndividual, setIsIndividual] = useState(false)
@@ -31,7 +32,11 @@ const AddOtherCost = () => {
 
 
 
-        axios.post('/mess/addOtherCost', { email, isIndividual, cost })
+        axios.post('/mess/addOtherCost', { email, isIndividual, cost }, {
+            headers: {
+                'Authorization': token
+            }
+        })
             .then(res => {
                 if (res.data.status) {
                     return Swl.fire({

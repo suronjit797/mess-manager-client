@@ -8,6 +8,7 @@ import RequireManager from '../utilities/RequireManager';
 
 const AddMealCost = () => {
     const mess = useSelector(state => state.mess.messData)
+    const token = localStorage.getItem('token')
 
     const [email, setEmail] = useState(0)
     const [mealCost, setMealCost] = useState('')
@@ -15,7 +16,11 @@ const AddMealCost = () => {
 
     const addMemberHandler = event => {
         event.preventDefault()
-        axios.post('/mess/addMembersMealCost', { email, mealCost })
+        axios.post('/mess/addMembersMealCost', { email, mealCost }, {
+            headers: {
+                'Authorization': token
+            }
+        })
             .then(res => {
                 if (res.data.status) {
                     return Swl.fire({

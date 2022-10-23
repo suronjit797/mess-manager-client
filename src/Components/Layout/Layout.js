@@ -15,48 +15,66 @@ import { getMonthData } from '../../features/MonthSlice'
 const Layout = ({ children }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const token = localStorage.getItem('token')
+
+    useEffect(() => {
+        if (!token) {
+            navigate('/login')
+        }
+    })
 
     const [close, setClose] = useState(true)
-    const [userData, setUserDataId] = useState({})
-    const token = localStorage.getItem('token')
+
+
+
     useEffect(() => {
-        // get user data
-        axios.get('/users', {
-            headers: {
-                'Authorization': token
-            }
-        })
-            .then(res => {
-                if (res.data.status) {
-                    setUserDataId(res.data.user)
-                    dispatch(getUserData(res.data.user))
-
-                    if (!res.data.user.mess_id) {
-                        navigate('/create-mess')
+        if (token) {
+            // get user data
+            axios.get('/users', {
+                headers: {
+                    'Authorization': token
+                }
+            })
+                .then(res => {
+                    if (res.data.status) {
+                        dispatch(getUserData(res.data.user))
+                        if (!res.data.user.mess_id) {
+                            navigate('/create-mess')
+                        }
                     }
-                }
-            })
-            .catch(err => console.table(err))
+                })
+                .catch(err => console.table(err))
 
-        // get mess data
-        axios.get('/mess/singleMess')
-            .then(res => {
-                dispatch(getMessData(res.data.mess))
-                const userRes = res.data.mess.members.find(member => member._id === userData._id)
-                if (userRes && Object.keys(userRes).length > 0) {
-                    dispatch(getUserData(userRes))
+            // get mess data
+            axios.get('/mess/singleMess', {
+                headers: {
+                    'Authorization': token
                 }
             })
-            .catch(err => console.error(err))
+                .then(res => {
+                    if (res.data.status) {
+                        dispatch(getMessData(res.data.mess))
+                    }
+                })
+                .catch(err => console.error(err))
 
-        // get month list
-        axios.get('/mess/monthList')
-            .then(res => {
-                if (res.data.status) {
-                    dispatch(getMonthData(res.data.month))
+            // get month list
+            axios.get('/mess/monthList', {
+                headers: {
+                    'Authorization': token
                 }
             })
-            .catch(err => console.error(err))
+                .then(res => {
+                    if (res.data.status) {
+                        dispatch(getMonthData(res.data.month))
+                    }
+                })
+                .catch(err => console.error(err))
+        } else {
+            navigate('/login')
+        }
+
+
     }, [dispatch, token, navigate])
 
 

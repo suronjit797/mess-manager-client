@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 
 const CreateMess = () => {
     const navigate = useNavigate()
+    const token = localStorage.getItem('token')
 
     const [err, setErr] = useState('')
     const [mess_name, setMess_name] = useState('')
@@ -26,7 +27,11 @@ const CreateMess = () => {
     const submitHandler = event => {
         event.preventDefault()
 
-        axios.post('/mess', { mess_name, mess_month })
+        axios.post('/mess', { mess_name, mess_month }, {
+            headers: {
+                Authorization: token
+            }
+        })
             .then(res => {
                 if (res.data.status) {
                     navigate('/')

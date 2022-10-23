@@ -14,7 +14,11 @@ const SummaryLeft = memo(() => {
         return <p> Loading... </p>
     }
 
-    const { total_deposit, total_meal, total_other_cost, total_solo_cost, meal_rate } = mess
+    let { total_deposit, total_meal, total_other_cost, total_solo_cost, meal_rate } = mess
+
+    if (!Number.isFinite(meal_rate)) {
+        meal_rate = 0
+    }
 
     const totalMealCost = Number(meal_rate) * Number(total_meal)
     const sharedCost = Number(total_other_cost) / mess.members.length || 0

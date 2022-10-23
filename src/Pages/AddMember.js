@@ -6,11 +6,17 @@ import Swl from 'sweetalert2'
 import RequireManager from '../utilities/RequireManager';
 
 const AddMember = () => {
+    const token = localStorage.getItem('token')
+    
     const [email, setEmail] = useState('')
     const [err, setErr] = useState('')
     const addMemberHandler = event => {
         event.preventDefault()
-        axios.post('/mess/addMember', { email })
+        axios.post('/mess/addMember', { email }, {
+            headers: {
+                'Authorization': token
+            }
+        })
             .then(res => {
                 if (res.data.status) {
                     return Swl.fire({
