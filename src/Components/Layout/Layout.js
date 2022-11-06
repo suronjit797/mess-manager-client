@@ -21,10 +21,15 @@ const Layout = ({ children }) => {
         if (!token) {
             navigate('/login')
         }
-    })
+    }, [token])
 
     const [close, setClose] = useState(true)
-
+    const windowWidth = window.innerWidth
+    useEffect(() => {
+        if (windowWidth <= 500) {
+            setClose(false)
+        }
+    }, [windowWidth])
 
 
     useEffect(() => {
@@ -83,7 +88,7 @@ const Layout = ({ children }) => {
             <div className='layout'>
                 <LeftNav close={close} setClose={setClose} />
                 <div className='w-100 px-3 layout_body'>
-                    <TopNav />
+                    <TopNav close={close} setClose={setClose} />
                     {children}
                     <Footer />
                 </div>

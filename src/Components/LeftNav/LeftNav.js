@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './LeftNav.css'
+import Swal from 'sweetalert2'
+import Placeholder from 'react-bootstrap/Placeholder';
 
 import {
     FcHome,
@@ -19,13 +21,17 @@ import {
     FcCancel
 } from 'react-icons/fc';
 import { AiOutlineRight, AiOutlineLeft, AiOutlineLogout } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
 
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 
 const LeftNav = memo(({ close, setClose }) => {
     const navigate = useNavigate()
     const user = useSelector(state => state.user.user)
+    const mess = useSelector(state => state.mess.messData)
+
+
 
     const handleLogout = () => {
         localStorage.removeItem('token')
@@ -93,11 +99,6 @@ const LeftNav = memo(({ close, setClose }) => {
             name: 'Delete Old Month',
             link: '/delete-month',
         },
-        {
-            icon: <FcCancel />,
-            name: 'Delete Mess',
-            link: '/delete-mess',
-        },
     ]
 
     const memberNav = [
@@ -123,9 +124,30 @@ const LeftNav = memo(({ close, setClose }) => {
         },
     ]
 
-
-    if (Object.keys(user).length === 0) {
-        return <p className="text-danger"> Loading... </p>
+    const deleteMessHandler = () => {
+        Swal.fire({
+            title: 'Do you want to delete mess?',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/mess/deleteMess/${mess._id}?monthId=${mess.month_id}`)
+                    .then(res => {
+                        if (res.data.status) {
+                            Swal.fire({
+                                text: 'Mess deleted successfully',
+                                icon: 'success'
+                            })
+                            navigate('/create-mess')
+                        }
+                    })
+                    .catch(error => Swal.fire({
+                        title: 'Opps...',
+                        text: error.response.data.message,
+                        icon: 'error'
+                    }))
+            }
+        })
     }
 
     return (
@@ -136,20 +158,59 @@ const LeftNav = memo(({ close, setClose }) => {
                     <AiOutlineLeft />
                 </span>
             </div>
-            <ul className='mb-0'>
-                {
-                    (user.post.toLowerCase() ===  'manager' ? managerNav : memberNav).map(item => (
-                        <li key={item.name} >
-                            <NavLink
-                                to={item.link}
-                                className={`rightNavItems ${close ? '' : 'justify-content-center'}`}>
-                                <span className='icon'> {item.icon} </span>
-                                <span className={`${close ? '' : 'd-none '} text`}> {item.name} </span>
-                            </NavLink>
+
+
+            {
+                Object.keys(user).length === 0 || Object.keys(mess).length === 0 ? (
+                    <div className='p-3'>
+                        <Placeholder animation="glow">
+                            <Placeholder xs={12} className='my-2' />
+                            <Placeholder xs={12} className='my-2' />
+                            <Placeholder xs={12} className='my-2' />
+                            <Placeholder xs={12} className='my-2' />
+                            <Placeholder xs={12} className='my-2' />
+                            <Placeholder xs={12} className='my-2' />
+                            <Placeholder xs={12} className='my-2' />
+                            <Placeholder xs={12} className='my-2' />
+                        </Placeholder>
+                    </div>
+                ) : (
+                    <ul className='mb-0'>
+                        {
+                            (user.post.toLowerCase() === 'manager' ? managerNav : memberNav).map(item => (
+                                <li key={item.name} >
+                                    <NavLink
+                                        to={item.link}
+                                        className={`rightNavItems ${close ? '' : 'justify-content-center'}`}>
+                                        <span className='icon'> {item.icon} </span>
+                                        <span className={`${close ? '' : 'd-none '} text`}> {item.name} </span>
+                                    </NavLink>
+                                </li>
+                            ))
+                        }
+
+                        <li >
+                            {
+                                (user.post.toLowerCase() === 'manager' ? (
+                                    <div
+                                        onClick={deleteMessHandler}
+                                        className={`rightNavItems ${close ? '' : 'justify-content-center'}`}>
+                                        <span className='icon'>  <FcCancel /> </span>
+                                        <span className={`${close ? '' : 'd-none '} text`}> Delete Mess </span>
+                                    </div>
+                                ) : (
+                                    <NavLink
+                                        to='/delete-mess'
+                                        className={`rightNavItems ${close ? '' : 'justify-content-center'}`}>
+                                        <span className='icon'>  <FcCancel /> </span>
+                                        <span className={`${close ? '' : 'd-none '} text`}> Delete Mess </span>
+                                    </NavLink>
+                                ))
+                            }
                         </li>
-                    ))
-                }
-            </ul>
+                    </ul>
+                )
+            }
 
             <div className="bottomNav mt-auto">
                 <div className="user">
@@ -159,8 +220,20 @@ const LeftNav = memo(({ close, setClose }) => {
                         }
                     </div>
                     <div className={close ? "userDetails" : 'd-none'}>
-                        <p className="user-name m-0 text-center text-capitalize"> {user.name} </p>
-                        <small className='user-role d-block text-center text-capitalize'> {user.post} </small>
+                        <p className="user-name m-0 text-center text-capitalize"> {
+                            user.name ? user.name : (
+                                <Placeholder animation="glow" >
+                                    <Placeholder xs={12} style={{ width: '100px' }} size="sm" className='my-2' />
+                                </Placeholder>
+                            )
+                        } </p>
+                        <small className='user-role d-block text-center text-capitalize'> {
+                            user.post ? user.post : (
+                                <Placeholder animation="glow" >
+                                    <Placeholder xs={12} style={{ width: '100px' }} size="xs" className='my-2' />
+                                </Placeholder>
+                            )
+                        } </small>
                     </div>
                     <AiOutlineLogout onClick={handleLogout} className={close ? "arrowBtn p-1" : 'd-none'} />
                 </div>

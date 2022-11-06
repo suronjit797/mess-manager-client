@@ -11,9 +11,10 @@ const Home = () => {
     return (
         <Layout>
             <Row className='gx-1 py-3'  >
-                <Col md={4}> <SummaryLeft /> </Col>
-                <Col md={8}> <SummaryRight /> </Col>
+                <Col lg={4}> <SummaryLeft /> </Col>
+                <Col lg={8}> <SummaryRight /> </Col>
             </Row>
+            
 
             <HomeMembers />
 

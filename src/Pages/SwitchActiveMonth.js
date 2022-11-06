@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import Layout from '../Components/Layout/Layout'
 import Swl from 'sweetalert2'
-import RequireManager from '../utilities/RequireManager';
 import { getUserData } from '../features/UserSlice'
 import { getMessData } from '../features/MessSlice'
 import { useDispatch, useSelector } from 'react-redux'
