@@ -19,6 +19,7 @@ export const messSlice = createSlice({
             state.messData.total_other_cost = Number(data.total_other_cost)
             state.messData.total_solo_cost = Number(data.total_solo_cost)
             state.messData.meal_rate = (Number(data.total_meal_cost) / Number(data.total_meal)) || 0
+            state.messData.sharedCost = Number(data.total_other_cost) / data.members.length || 0
         },
     },
 })

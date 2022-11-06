@@ -58,7 +58,7 @@ const HomeMembers = memo(() => {
             </div>
         )
     }
-    const { members, meal_rate } = mess
+    const { members, meal_rate, sharedCost } = mess
 
 
 
@@ -77,7 +77,7 @@ const HomeMembers = memo(() => {
             <div className="memberList mt-4">
                 <div className="row g-3" >
                     {
-                        members.map(member => <HomeCard key={member._id} {...member} meal_rate={meal_rate} />)
+                        members.map(member => <HomeCard key={member._id} {...member} meal_rate={meal_rate} sharedCost={sharedCost} />)
                     }
 
                 </div>

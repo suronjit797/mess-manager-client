@@ -29,15 +29,14 @@ const SummaryLeft = memo(() => {
         )
     }
 
-    let { total_deposit, total_meal, total_other_cost, total_solo_cost, meal_rate } = mess
+    let { total_deposit, total_meal, total_other_cost, total_solo_cost, meal_rate, sharedCost } = mess
 
     if (!Number.isFinite(meal_rate)) {
         meal_rate = 0
     }
 
     const totalMealCost = Number(meal_rate) * Number(total_meal)
-    const sharedCost = Number(total_other_cost) / mess.members.length || 0
-    const messBalance = total_deposit - (totalMealCost + sharedCost)
+    const messBalance = total_deposit - (totalMealCost + total_other_cost + total_solo_cost)
 
     return (
         <div className='m-2 border border-1 rounded-3 p-3 text-capitalize' >

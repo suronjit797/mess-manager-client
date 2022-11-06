@@ -35,10 +35,16 @@ const SummaryLeft = memo(() => {
     }
 
     const user = mess.members.find(member => member._id === id)
+    let meal_rate = mess.meal_rate
+
+    if (!Number.isFinite(meal_rate)) {
+        meal_rate = 0
+    }
 
     // calculate data 
-    const myCost = (Number(user?.meal) * mess.meal_rate) + (Number(user?.solo))
+    const myCost = (Number(user.meal) * meal_rate) + (Number(user.solo) + Number(mess.sharedCost))
     const myBalance = Number(user?.balance) - myCost
+
 
     return (
         <>

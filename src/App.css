@@ -1,26 +1,37 @@
-:root{
+:root {
     --primary-color: #3c40c6;
     --primary-border_color: #3c41c66b;
 }
 
-*{
+* {
     box-sizing: border-box;
 }
 
-img{
+img {
     max-width: 100%;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
-.cursor-pointer{
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.cursor-pointer {
     cursor: pointer;
 }
 
-.bg_primary{
+.bg_primary {
     background-color: var(--primary-color);
 }
 
-.text_primary{
+.text_primary {
     color: var(--primary-color);
 }
 

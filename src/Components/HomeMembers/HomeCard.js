@@ -1,12 +1,13 @@
 import React from 'react';
 
-const HomeCard = ({ name, meal, meal_rate, balance, solo }) => {
-    let totalCost = 0
-    if (Number(meal) > 0 && Number(meal_rate) > 0 && Number.isFinite(meal) && Number.isFinite(meal_rate) ) {
-        totalCost = (Number(meal_rate) * Number(meal)) + Number(solo)
+const HomeCard = ({ name, meal, meal_rate, balance, solo, sharedCost }) => {
+
+    if (!Number.isFinite(meal_rate)) {
+        meal_rate = 0
     }
 
 
+    let totalCost = (Number(meal_rate) * Number(meal)) + Number(solo) + Number(sharedCost)
 
     return (
         <div className="col-md-4">
@@ -15,11 +16,15 @@ const HomeCard = ({ name, meal, meal_rate, balance, solo }) => {
                 <div className="row text-capitalize">
                     <div className="col-sm-6">
                         <p className='m-0' style={{ fontSize: '12px' }} >Total Meal: {meal.toFixed(2)}</p>
-                        <p className='m-0' style={{ fontSize: '12px' }} >Total Cost: {totalCost.toFixed(2)} tk</p>
+                        <p className='m-0' style={{ fontSize: '12px' }} >
+                            Total Cost: {Number(totalCost).toFixed(2)} tk
+                        </p>
                     </div>
                     <div className="col-sm-6">
                         <p className='m-0' style={{ fontSize: '12px' }} >Total Deposit: {balance.toFixed(2)} tk</p>
-                        <p className='m-0' style={{ fontSize: '12px' }} >Balance: {(Number(balance) - Number(totalCost)).toFixed(2)} tk</p>
+                        <p className='m-0' style={{ fontSize: '12px' }} >
+                            Balance: {(Number(balance) - (Number(totalCost))).toFixed(2)} tk
+                        </p>
                     </div>
                 </div>
             </div>
