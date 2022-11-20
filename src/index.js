@@ -12,7 +12,7 @@ import axios from 'axios'
 
 
 // axios.defaults.baseURL = 'http://localhost:5000/api/v1'
-axios.defaults.baseURL = 'https://mess-manager.onrender.com/api/v1'
+axios.defaults.baseURL = 'https://super-fish-flannel-nightgown.cyclic.app/api/v1'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
