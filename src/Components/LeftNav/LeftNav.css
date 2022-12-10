@@ -9,6 +9,7 @@
     flex-direction: column;
     transition: .2s;
     width: 320px;
+    z-index: 999;
 }
 
 .rightNav.active {
